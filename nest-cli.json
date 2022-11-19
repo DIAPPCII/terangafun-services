@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/user-app/src",
+  "monorepo": true,
+  "root": "apps/user-app",
+  "compilerOptions": {
+    "webpack": true,
+    "tsConfigPath": "apps/user-app/tsconfig.app.json"
+  },
+  "projects": {
+    "user-app": {
+      "type": "application",
+      "root": "apps/user-app",
+      "entryFile": "main",
+      "sourceRoot": "apps/user-app/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/user-app/tsconfig.app.json"
+      }
+    },
+    "event-app": {
+      "type": "application",
+      "root": "apps/event-app",
+      "entryFile": "main",
+      "sourceRoot": "apps/event-app/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/event-app/tsconfig.app.json"
+      }
+    },
+    "business-app": {
+      "type": "application",
+      "root": "apps/business-app",
+      "entryFile": "main",
+      "sourceRoot": "apps/business-app/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/business-app/tsconfig.app.json"
+      }
+    },
+    "shared": {
+      "type": "library",
+      "root": "libs/shared",
+      "entryFile": "index",
+      "sourceRoot": "libs/shared/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/shared/tsconfig.lib.json"
+      }
+    },
+    "product-app": {
+      "type": "application",
+      "root": "apps/product-app",
+      "entryFile": "main",
+      "sourceRoot": "apps/product-app/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/product-app/tsconfig.app.json"
+      }
+    }
+  }
+}
