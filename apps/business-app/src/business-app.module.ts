@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { Business } from './business/entities/business.entity';
 import { BusinessType } from './business-type/entities/business-type.entity';
+import { User } from '../../user-app/src/users/entities/user.entity';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { BusinessType } from './business-type/entities/business-type.entity';
       username: 'diappci',
       password: 'tFun2022#',
       database: 'tfundb_dev',
-      entities: [Business, BusinessType],
+      entities: [Business, BusinessType, User],
       synchronize: true,
       logging: true,
       namingStrategy: new SnakeNamingStrategy(),
