@@ -50,13 +50,13 @@ export class User {
   @Column({ type: 'text', nullable: true })
   biography: string;
 
-  @Column({ type: 'datetime' })
+  @Column({ type: 'timestamp' })
   createAt: Date;
 
-  @Column('datetime')
+  @Column('timestamp')
   lastUpdateDate: Date;
 
-  @Column({ type: 'datetime', nullable: true })
+  @Column({ type: 'timestamp', nullable: true })
   lastConnectionDate: Date;
 
   // @ManyToMany(() => Group)
