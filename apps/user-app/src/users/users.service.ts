@@ -54,7 +54,6 @@ export class UsersService {
           'registration saved, trying to create account on cognito {}',
         );
         const cognitoUser = new CreateCognitoUserDto();
-        cognitoUser.tfunId = user.id;
         cognitoUser.Password = createUserDto.password;
         if (user.email !== undefined && user.email !== null) {
           cognitoUser.Username = user.email;
