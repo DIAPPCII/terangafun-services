@@ -85,10 +85,10 @@ export class BusinessService {
   }
 
   update(id: string, updateBusinessDto: UpdateBusinessDto) {
-    return `This action updates a #${id} business`;
+    return this.businessRepository.update(id, updateBusinessDto);
   }
 
   remove(id: string) {
-    return `This action removes a #${id} business`;
+    return this.businessRepository.delete({ id });
   }
 }
