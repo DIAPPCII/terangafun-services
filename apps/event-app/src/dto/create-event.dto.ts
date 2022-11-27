@@ -36,9 +36,4 @@ export class CreateEventDto {
     @IsNotEmpty()
     @IsString()
     description: string;
-    @IsArray()
-    medias: string[];
-    @IsArray()
-    tags: string[];
-
 }
