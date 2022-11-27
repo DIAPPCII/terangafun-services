@@ -1,15 +1,13 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Event } from 'apps/event-app/src/entities/event.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
 
 @Entity()
-export class EventType {
+export class Tag {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column({ length: 500, unique: true })
     label: string;
-
-    @Column({ length: 500 })
-    logo: string;
 
     @Column('text')
     description: string;
@@ -19,4 +17,8 @@ export class EventType {
 
     @Column('timestamp')
     updatedAt: Date;
+
+    @ManyToMany(() => Event)
+    @JoinTable({ name: 'event_tag' })
+    events: Event[];
 }

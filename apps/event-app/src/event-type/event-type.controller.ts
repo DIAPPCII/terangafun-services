@@ -1,34 +1,44 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { EventTypeService } from './event-type.service';
 import { CreateEventTypeDto } from './dto/create-event-type.dto';
 import { UpdateEventTypeDto } from './dto/update-event-type.dto';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Param,
+  Patch,
+  Delete,
+} from '@nestjs/common';
+import { EventType } from './entities/event-type.entity';
+import { DeleteResult } from 'typeorm';
 
 @Controller('event-type')
 export class EventTypeController {
-  constructor(private readonly eventTypeService: EventTypeService) {}
+  constructor(private readonly eventTypeService: EventTypeService,) {}
 
   @Post()
-  create(@Body() createEventTypeDto: CreateEventTypeDto) {
+  async create(@Body() createEventTypeDto: CreateEventTypeDto) : Promise<EventType> {
     return this.eventTypeService.create(createEventTypeDto);
   }
 
   @Get()
-  findAll() {
+  async findAll() : Promise<EventType[]> {
     return this.eventTypeService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.eventTypeService.findOne(+id);
+  async findOne(@Param('id') id: string) : Promise<EventType> {
+    return this.eventTypeService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEventTypeDto: UpdateEventTypeDto) {
-    return this.eventTypeService.update(+id, updateEventTypeDto);
+  async update(@Param('id') id: string, @Body() updateEventTypeDto: UpdateEventTypeDto) : Promise<EventType> {
+    return this.eventTypeService.update(id, updateEventTypeDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.eventTypeService.remove(+id);
+  async remove(@Param('id') id: string) : Promise<DeleteResult> {
+    return this.eventTypeService.remove(id);
   }
 }
