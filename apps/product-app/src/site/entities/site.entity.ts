@@ -1,15 +1,9 @@
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryGeneratedColumn, TableInheritance
-} from "typeorm";
-import { Category } from '../../category/entities/category.entity';
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Category } from "../../category/entities/category.entity";
+import { SiteType } from "../../site-type/entities/site-type.entity";
 
 @Entity()
-@TableInheritance({ column: { type: "varchar", name: "type" } })
-export class Item {
+export class Site {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -31,7 +25,7 @@ export class Item {
   @Column({ type: "boolean"})
   published: boolean
 
-  @ManyToMany(() => Category)
-  @JoinTable({ name: 'item_category' })
-  categories: Category[];
+  @ManyToMany(() => SiteType)
+  @JoinTable({ name: 'site_site_type' })
+  types: SiteType[];
 }

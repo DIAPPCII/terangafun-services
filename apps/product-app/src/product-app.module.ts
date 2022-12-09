@@ -8,6 +8,14 @@ import { Category } from './category/entities/category.entity';
 import { Item } from './item/entities/item.entity';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { TagModule } from './tag/tag.module';
+import { HeadingModule } from './heading/heading.module';
+import { Heading } from "./heading/entities/heading.entity";
+import { SiteModule } from './site/site.module';
+import { Site } from "./site/entities/site.entity";
+import { SiteTypeModule } from './site-type/site-type.module';
+import { SiteType } from "./site-type/entities/site-type.entity";
+import { DestinationModule } from './destination/destination.module';
+import { Destination } from "./destination/entities/destination.entity";
 
 @Module({
   imports: [
@@ -18,7 +26,7 @@ import { TagModule } from './tag/tag.module';
       username: 'diappci',
       password: 'tFun2022#',
       database: 'tfundb_dev',
-      entities: [Category, Item],
+      entities: [Category, Item, Heading, Site, SiteType, Destination],
       synchronize: true,
       logging: true,
       namingStrategy: new SnakeNamingStrategy(),
@@ -26,6 +34,10 @@ import { TagModule } from './tag/tag.module';
     CategoryModule,
     ItemModule,
     TagModule,
+    HeadingModule,
+    SiteModule,
+    SiteTypeModule,
+    DestinationModule,
   ],
   controllers: [ProductAppController],
   providers: [ProductAppService],
