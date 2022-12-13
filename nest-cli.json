@@ -53,6 +53,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/product-app/tsconfig.app.json"
       }
+    },
+    "mobile-proxy": {
+      "type": "application",
+      "root": "apps/mobile-proxy",
+      "entryFile": "main",
+      "sourceRoot": "apps/mobile-proxy/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/mobile-proxy/tsconfig.app.json"
+      }
     }
   }
 }
