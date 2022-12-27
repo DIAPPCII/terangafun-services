@@ -18,10 +18,10 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "terangafun/shared": [
+      "@terangafun/shared": [
         "libs/shared/src"
       ],
-      "terangafun/shared/*": [
+      "@terangafun/shared/*": [
         "libs/shared/src/*"
       ]
     }

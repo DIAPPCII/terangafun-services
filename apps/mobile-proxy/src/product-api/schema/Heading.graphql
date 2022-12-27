@@ -2,7 +2,7 @@ type Heading {
     id: String
     name: String
     description: String
-    sections: [Section]
+    priority: Int
 }
 
 type Query {

@@ -1,11 +1,12 @@
 import { Args, Query, Resolver } from "@nestjs/graphql";
 import { ProductApiService } from "./product-api.service";
+import { Heading } from "../../../product-app/src/heading/entities/heading.entity";
 
 @Resolver("ProductApi")
 export class ProductApiResolver {
   constructor(private readonly productApiService: ProductApiService) {}
 
-  @Query("categories")
+  /*  @Query("categories")
   findCategories(page = 0, limit = 10) {
     return this.productApiService.findCategories();
   }
@@ -14,7 +15,7 @@ export class ProductApiResolver {
   findCategory(@Args("id") id: string) {
     console.log(`hhh${id}`);
     return this.productApiService.findCategoryById(id);
-  }
+  }*/
 
   @Query("headings")
   findHeadings() {
