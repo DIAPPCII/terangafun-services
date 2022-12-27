@@ -1,0 +1,11 @@
+type Heading {
+    id: String
+    name: String
+    description: String
+    sections: [Section]
+}
+
+type Query {
+    headings: [Heading]
+    heading(id: ID!): Heading
+}

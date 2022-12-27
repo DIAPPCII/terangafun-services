@@ -4,6 +4,7 @@ import { MobileProxyService } from "./mobile-proxy.service";
 import { GraphQLModule } from "@nestjs/graphql";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { ProductApiModule } from "./product-api/product-api.module";
+import { CognitoModule } from "./cognito/cognito.module";
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { ProductApiModule } from "./product-api/product-api.module";
       typePaths: ["./**/*.graphql"],
     }),
     ProductApiModule,
+    CognitoModule,
   ],
   controllers: [MobileProxyController],
   providers: [MobileProxyService],

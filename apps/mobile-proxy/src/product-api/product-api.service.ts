@@ -11,13 +11,32 @@ export class ProductApiService extends RESTDataSource {
     return "This action adds a new productApi";
   }
 
+  /****
+   * *****************************************************************
+   * ***/
+  /*** Category ***/
   async findCategories() {
-    const result = await this.get("category");
+    const result = await this.get("category").catch(err => {
+      console.log(err);
+    });
     return result.data;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} productApi`;
+  async findCategoryById(id: string) {
+    return await this.get(`category/${id}`).catch(err => {
+      console.log(err);
+    });
+  }
+
+  /****
+   * *****************************************************************
+   * ***/
+  /*** Heading ***/
+  async findHeadings() {
+    const result = await this.get("heading").catch(err => {
+      console.log(err);
+    });
+    return result.data;
   }
 
   update(id: number, updateProductApiInput: UpdateProductApiInput) {

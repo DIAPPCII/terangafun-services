@@ -1,8 +1,8 @@
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Section } from "../../section/entities/section.entity";
+import { Heading } from "../../heading/entities/heading.entity";
 
 @Entity()
-export class Heading {
+export class Section {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -20,7 +20,8 @@ export class Heading {
 
   @Column({ type: "timestamp" })
   lastUpdate: Date;
-  @ManyToMany(() => Section)
+
+  @ManyToMany(() => Heading)
   @JoinTable({ name: "heading_section" })
-  sections: Section;
+  headings: Heading;
 }

@@ -1,26 +1,23 @@
 import { BadRequestException, ConflictException, Injectable, InternalServerErrorException } from "@nestjs/common";
-import { CreateHeadingDto } from "./dto/create-heading.dto";
-import { UpdateHeadingDto } from "./dto/update-heading.dto";
+import { CreateSectionDto } from "./dto/create-section.dto";
+import { UpdateSectionDto } from "./dto/update-section.dto";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Heading } from "./entities/heading.entity";
+import { Section } from "./entities/section.entity";
 import { Repository } from "typeorm";
 import { FilterOperator, paginate, Paginated, PaginateQuery } from "nestjs-paginate";
 
 @Injectable()
-export class HeadingService {
-  constructor(
-    @InjectRepository(Heading)
-    private readonly headingRepository: Repository<Heading>,
-  ) {}
+export class SectionService {
+  constructor(@InjectRepository(Section) private readonly sectionRepository: Repository<Section>) {}
 
-  async create(createHeadingDto: CreateHeadingDto) {
-    const heading = new Heading();
-    heading.name = createHeadingDto.name;
-    heading.description = createHeadingDto.description;
-    heading.priority = createHeadingDto.priority;
-    heading.createAt = new Date();
-    heading.lastUpdate = heading.createAt;
-    return await this.headingRepository.save(heading).catch(error => {
+  async create(createSectionDto: CreateSectionDto) {
+    const section = new Section();
+    section.name = createSectionDto.name;
+    section.description = createSectionDto.description;
+    section.priority = createSectionDto.priority;
+    section.createAt = new Date();
+    section.lastUpdate = section.createAt;
+    return await this.sectionRepository.save(section).catch(error => {
       switch (error.code) {
         case "ER_DUP_ENTRY":
           throw new ConflictException(error.message);
@@ -29,9 +26,8 @@ export class HeadingService {
     });
   }
 
-  async findAll(query: PaginateQuery): Promise<Paginated<Heading>> {
-    return await paginate(query, this.headingRepository, {
-      relations: ["sections"],
+  async findAll(query: PaginateQuery): Promise<Paginated<Section>> {
+    return await paginate(query, this.sectionRepository, {
       sortableColumns: ["id", "name", "createAt", "lastUpdate"],
       //nullSort: 'first',
       searchableColumns: ["name", "description"],
@@ -51,14 +47,14 @@ export class HeadingService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} heading`;
+    return `This action returns a #${id} section`;
   }
 
-  update(id: number, updateHeadingDto: UpdateHeadingDto) {
-    return `This action updates a #${id} heading`;
+  update(id: number, updateSectionDto: UpdateSectionDto) {
+    return `This action updates a #${id} section`;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} heading`;
+    return `This action removes a #${id} section`;
   }
 }
