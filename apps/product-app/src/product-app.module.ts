@@ -18,6 +18,10 @@ import { DestinationModule } from "./destination/destination.module";
 import { Destination } from "./destination/entities/destination.entity";
 import { SectionModule } from "./section/section.module";
 import { Section } from "./section/entities/section.entity";
+import { LocationModule } from "./location/location.module";
+import { LocationTypeModule } from "./location-type/location-type.module";
+import { Location } from "./location/entities/location.entity";
+import { LocationType } from "./location-type/entities/location-type.entity";
 
 @Module({
   imports: [
@@ -28,7 +32,7 @@ import { Section } from "./section/entities/section.entity";
       username: "diappci",
       password: "tFun2022#",
       database: "tfundb_dev",
-      entities: [Heading, Section, Category, Item, Site, SiteType, Destination],
+      entities: [Heading, Section, Location, LocationType, Category, Item, Site, SiteType, Destination],
       synchronize: true,
       logging: true,
       namingStrategy: new SnakeNamingStrategy(),
@@ -41,6 +45,8 @@ import { Section } from "./section/entities/section.entity";
     SiteTypeModule,
     DestinationModule,
     SectionModule,
+    LocationModule,
+    LocationTypeModule,
   ],
   controllers: [ProductAppController],
   providers: [ProductAppService],

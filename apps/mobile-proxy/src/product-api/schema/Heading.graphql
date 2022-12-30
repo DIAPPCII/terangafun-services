@@ -3,6 +3,7 @@ type Heading {
     name: String
     description: String
     priority: Int
+    sections: [Section]
 }
 
 type Query {

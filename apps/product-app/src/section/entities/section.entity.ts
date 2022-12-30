@@ -1,5 +1,6 @@
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Heading } from "../../heading/entities/heading.entity";
+import { SectionType } from "./SectionType.enum";
 
 @Entity()
 export class Section {
@@ -11,6 +12,9 @@ export class Section {
 
   @Column({ type: "text", nullable: true })
   description: string;
+
+  @Column({ type: "enum", enum: SectionType, nullable: false })
+  type: SectionType;
 
   @Column({ type: "int", nullable: false })
   priority: number;

@@ -1,0 +1,24 @@
+type User {
+    id: ID
+    email: String
+    phone: String
+    alias: String
+    safetyEmail: String
+    biography: String
+    firstName: String
+    lastName: String
+    gender: String
+    birthDate: String
+    isPublic: Boolean
+    isVerified: Boolean
+    profileUrl: String
+    coverUrl: String
+}
+
+type UserDetailled {
+    user: User
+}
+
+type Query {
+    user(id: ID!): User
+}

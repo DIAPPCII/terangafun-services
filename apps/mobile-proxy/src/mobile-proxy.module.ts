@@ -5,7 +5,7 @@ import { GraphQLModule } from "@nestjs/graphql";
 import { ApolloDriver, ApolloDriverConfig } from "@nestjs/apollo";
 import { ProductApiModule } from "./product-api/product-api.module";
 import { CognitoModule } from "./cognito/cognito.module";
-import { join } from "path";
+import { UserApiModule } from "./user-api/user-api.module";
 
 @Module({
   imports: [
@@ -21,6 +21,7 @@ import { join } from "path";
     }),
     ProductApiModule,
     CognitoModule,
+    UserApiModule,
   ],
   controllers: [MobileProxyController],
   providers: [MobileProxyService],
