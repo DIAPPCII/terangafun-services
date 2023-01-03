@@ -1,11 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { Gender } from './gender.enum';
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Gender } from "./gender.enum";
+import { Interest } from "../../interest/entities/interest.entity";
 
 //import { Group } from '../../groups/entities/group.entity';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column({ unique: true, nullable: true })
@@ -29,16 +30,16 @@ export class User {
   @Column({ length: 500, nullable: true })
   lastName: string;
 
-  @Column({ type: 'enum', enum: Gender, nullable: true })
+  @Column({ type: "enum", enum: Gender, nullable: true })
   gender: Gender;
 
-  @Column({ type: 'date', nullable: true })
+  @Column({ type: "date", nullable: true })
   birthDate: Date;
 
-  @Column('boolean')
+  @Column("boolean")
   isPublic: boolean;
 
-  @Column('boolean')
+  @Column("boolean")
   isVerified: boolean;
 
   @Column({ length: 500, nullable: true })
@@ -47,17 +48,21 @@ export class User {
   @Column({ length: 500, nullable: true })
   coverUrl: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: "text", nullable: true })
   biography: string;
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: "timestamp" })
   createAt: Date;
 
-  @Column('timestamp')
+  @Column("timestamp")
   lastUpdateDate: Date;
 
-  @Column({ type: 'timestamp', nullable: true })
+  @Column({ type: "timestamp", nullable: true })
   lastConnectionDate: Date;
+
+  @ManyToMany(() => Interest)
+  @JoinTable({ name: "user_interests" })
+  interests: [Interest];
 
   // @ManyToMany(() => Group)
   // groups: Group[];
