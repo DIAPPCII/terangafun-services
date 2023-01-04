@@ -1,4 +1,4 @@
-import { ConflictException, Injectable, Logger } from "@nestjs/common";
+import { ConflictException, HttpStatus, Injectable, Logger, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { createHmac } from "crypto";
 import { FilterOperator, paginate, Paginated, PaginateQuery } from "nestjs-paginate";
@@ -10,6 +10,8 @@ import { CreateCognitoUserDto } from "./dto/create-cognito-user.dto";
 import { CognitoIdentityProviderClient, SignUpCommand } from "@aws-sdk/client-cognito-identity-provider";
 import { Interest } from "../interest/entities/interest.entity";
 import { TargetDto } from "./dto/target.dto";
+import { InterestService } from "../interest/interest.service";
+import { constants } from "http2";
 
 @Injectable()
 export class UsersService {
@@ -22,6 +24,7 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
+    private readonly interestService: InterestService,
   ) {}
 
   generateHashSecret(username) {
@@ -81,7 +84,7 @@ export class UsersService {
 
   async findAll(query: PaginateQuery): Promise<Paginated<User>> {
     return paginate(query, this.usersRepository, {
-      relations: ["interests"],
+      relations: ["interests"]!,
       sortableColumns: ["id", "alias", "firstName", "lastName", "createAt", "lastUpdateDate", "lastConnectionDate"],
       //nullSort: 'first',
       searchableColumns: [
@@ -102,7 +105,7 @@ export class UsersService {
   }
 
   async findOne(id: string): Promise<User> {
-    return this.usersRepository.findOne({ where: { id }, relations: ["interests"] });
+    return this.usersRepository.findOne({ where: { id }, relations: ["interests"]! });
   }
 
   update(id: string, updateUserDto: UpdateUserDto) {
@@ -113,13 +116,43 @@ export class UsersService {
     return this.usersRepository.delete({ id });
   }
 
-  addInterest(id: string, targetDto: TargetDto) {
-    return this.usersRepository.findOneBy({ id });
+  async addInterest(id: string, targetDto: TargetDto) {
+    return await this.findOne(id).then(async user => {
+      if (user === null) {
+        throw new NotFoundException({ message: `user with id [${id}] not exists` });
+      }
+      const interest = await this.interestService.findOne(targetDto.targetId);
+      if (interest === null) {
+        throw new NotFoundException({ message: `target interest [${targetDto.targetId}] not exists` });
+      }
+      user.interests.push(interest);
+      await this.usersRepository.save(user).catch(err => {
+        Logger.error(err);
+      });
+      return user;
+    });
   }
 
   async getInterests(id: string) {
     const user = await this.findOne(id);
-    console.log(user);
-    return user.interests;
+    return user?.interests || [];
+  }
+
+  async deleteUserInterest(id: string, targetId: string) {
+    await this.findOne(id)
+      .then(async user => {
+        if (user !== null) {
+          const index = user.interests.findIndex(interest => interest.id === targetId);
+          if (index !== -1) {
+            user.interests.splice(index, 1);
+            await this.usersRepository.save(user).catch(err => {
+              Logger.error(err);
+            });
+          }
+        }
+      })
+      .catch(err => {
+        Logger.error(err);
+      });
   }
 }

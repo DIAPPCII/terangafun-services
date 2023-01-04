@@ -47,8 +47,8 @@ export class InterestService {
     });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} interest`;
+  async findOne(id: string) {
+    return await this.interestRepositoy.findOneBy({ id });
   }
 
   update(id: number, updateInterestDto: UpdateInterestDto) {

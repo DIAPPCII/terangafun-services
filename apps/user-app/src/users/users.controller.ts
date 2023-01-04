@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, ValidationPipe } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { Paginate, PaginateQuery } from "nestjs-paginate";
@@ -33,8 +33,8 @@ export class UsersController {
     return "To DO";
   }
 
-  @Delete(":id/friends/:targetUserId")
-  deleteFriendShip(@Param("id") id: string, @Param("targetUserId") targetUserId: string) {
+  @Delete(":id/friends/:targetId")
+  deleteFriendShip(@Param("id") id: string, @Param("targetId") targetId: string) {
     return "To DO";
   }
 
@@ -53,8 +53,8 @@ export class UsersController {
     return "To DO";
   }
 
-  @Delete(":id/following/:targetUserId")
-  unFollowUser(@Param("id") id: string, @Param("targetUserId") targetUserId: string) {
+  @Delete(":id/following/:targetId")
+  unFollowUser(@Param("id") id: string, @Param("targetId") targetId: string) {
     return "To DO";
   }
 
@@ -68,6 +68,11 @@ export class UsersController {
     return this.usersService.getInterests(id);
   }
 
+  @Delete(":id/interests/:targetId")
+  @HttpCode(204)
+  deleteUserInterest(@Param("id") id: string, @Param("targetId") targetId: string) {
+    this.usersService.deleteUserInterest(id, targetId);
+  }
   @Get(":id/medias")
   findUserMedias(@Param("id") id: string) {
     return "To DO";
@@ -79,6 +84,7 @@ export class UsersController {
   }
 
   @Delete(":id")
+  @HttpCode(204)
   remove(@Param("id") id: string) {
     return this.usersService.remove(id);
   }

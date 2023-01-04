@@ -6,6 +6,7 @@ import { Interest } from "./entities/interest.entity";
 
 @Module({
   imports: [TypeOrmModule.forFeature([Interest])],
+  exports: [InterestService],
   controllers: [InterestController],
   providers: [InterestService],
 })
