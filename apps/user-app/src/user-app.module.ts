@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { InterestModule } from './interest/interest.module';
+import { FollowshipModule } from './followship/followship.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { InterestModule } from './interest/interest.module';
     }),
     UsersModule,
     InterestModule,
+    FollowshipModule,
   ],
   controllers: [UserAppController],
   providers: [UserAppService],

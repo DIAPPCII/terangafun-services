@@ -44,8 +44,8 @@ export class UsersController {
   }
 
   @Post(":id/following")
-  followUser(@Body(new ValidationPipe()) targetDto: TargetDto) {
-    return "To DO";
+  followUser(@Param("id") id: string, @Body(new ValidationPipe()) targetDto: TargetDto) {
+    return this.usersService.followUser(id, targetDto.targetId);
   }
 
   @Get(":id/following")

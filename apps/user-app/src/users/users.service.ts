@@ -12,6 +12,7 @@ import { Interest } from "../interest/entities/interest.entity";
 import { TargetDto } from "./dto/target.dto";
 import { InterestService } from "../interest/interest.service";
 import { constants } from "http2";
+import { FollowshipService } from "../followship/followship.service";
 
 @Injectable()
 export class UsersService {
@@ -25,6 +26,7 @@ export class UsersService {
     @InjectRepository(User)
     private usersRepository: Repository<User>,
     private readonly interestService: InterestService,
+    private readonly followshipService: FollowshipService,
   ) {}
 
   generateHashSecret(username) {
@@ -116,19 +118,25 @@ export class UsersService {
     return this.usersRepository.delete({ id });
   }
 
+  /*
+   *  User's Interest
+   * */
   async addInterest(id: string, targetDto: TargetDto) {
     return await this.findOne(id).then(async user => {
       if (user === null) {
         throw new NotFoundException({ message: `user with id [${id}] not exists` });
       }
-      const interest = await this.interestService.findOne(targetDto.targetId);
-      if (interest === null) {
-        throw new NotFoundException({ message: `target interest [${targetDto.targetId}] not exists` });
+      let interest = user?.interests.find(item => item.id === targetDto.targetId) || undefined;
+      if (!interest) {
+        interest = await this.interestService.findOne(targetDto.targetId);
+        if (interest === null) {
+          throw new NotFoundException({ message: `target interest [${targetDto.targetId}] not exists` });
+        }
+        user.interests.push(interest);
+        return await this.usersRepository.save(user).catch(err => {
+          Logger.error(err);
+        });
       }
-      user.interests.push(interest);
-      await this.usersRepository.save(user).catch(err => {
-        Logger.error(err);
-      });
       return user;
     });
   }
@@ -154,5 +162,24 @@ export class UsersService {
       .catch(err => {
         Logger.error(err);
       });
+  }
+
+  /*
+   *  User's following
+   * */
+  async followUser(followerId: string, followedId: string) {
+    const follower = await this.findOne(followerId).then(follower => {
+      if (follower === null) {
+        throw new NotFoundException({ message: `user with id [${followerId}] not exists` });
+      }
+      return follower;
+    });
+    const followed = await this.findOne(followedId).then(followed => {
+      if (followed === null) {
+        throw new NotFoundException({ message: `user with id [${followedId}] not exists` });
+      }
+      return followed;
+    });
+    return await this.followshipService.create(follower, followed);
   }
 }
