@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Category {
+export class ShopType {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -10,6 +10,9 @@ export class Category {
 
   @Column({ type: "text", nullable: true })
   description: string;
+
+  @Column()
+  avatar: string;
 
   @Column({ type: "timestamp" })
   createAt: Date;

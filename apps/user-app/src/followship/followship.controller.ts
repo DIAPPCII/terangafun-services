@@ -1,13 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { FollowshipService } from './followship.service';
-import { CreateFollowshipDto } from './dto/create-followship.dto';
-import { UpdateFollowshipDto } from './dto/update-followship.dto';
+import { Body, Controller, Delete, Param, Patch } from "@nestjs/common";
+import { FollowshipService } from "./followship.service";
+import { UpdateFollowshipDto } from "./dto/update-followship.dto";
 
-@Controller('followship')
+@Controller("followship")
 export class FollowshipController {
   constructor(private readonly followshipService: FollowshipService) {}
 
-  @Post()
+  /*@Post()
   create(@Body() createFollowshipDto: CreateFollowshipDto) {
     return this.followshipService.create(createFollowshipDto);
   }
@@ -20,15 +19,15 @@ export class FollowshipController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.followshipService.findOne(+id);
-  }
+  }*/
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFollowshipDto: UpdateFollowshipDto) {
+  @Patch(":id")
+  update(@Param("id") id: string, @Body() updateFollowshipDto: UpdateFollowshipDto) {
     return this.followshipService.update(+id, updateFollowshipDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @Delete(":id")
+  remove(@Param("id") id: string) {
     return this.followshipService.remove(+id);
   }
 }

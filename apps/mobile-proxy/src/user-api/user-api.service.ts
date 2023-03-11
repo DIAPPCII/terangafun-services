@@ -7,7 +7,7 @@ export class UserApiService extends RESTDataSource {
 
   /**
    * *******************************************************
-   * User services
+   * User libs
    */
   async findUserById(id: string) {
     return await this.get(`users/${id}`).catch(err => {

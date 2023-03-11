@@ -2,18 +2,20 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class SiteType {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column({ unique: true, nullable: false })
   name: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Column()
+  avatar: string;
+  @Column({ type: "text", nullable: true })
   description: string;
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: "timestamp" })
   createAt: Date;
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: "timestamp" })
   lastUpdate: Date;
 }
