@@ -1,0 +1,52 @@
+version: '3.7'
+
+services:
+  business-app:
+    build:
+      context: .
+      dockerfile: ./apps/business-app/Dockerfile
+    ports:
+      - 5000:5000
+    command: npm run start:prod:business
+    networks:
+      - terangafun-network
+  event-app:
+    build:
+      context: .
+      dockerfile: ./apps/event-app/Dockerfile
+    command: npm run start:prod:event
+    ports:
+      - 6000:6000
+    networks:
+      - terangafun-network
+  mobile-proxy:
+    build:
+      context: .
+      dockerfile: ./apps/mobile-proxy/Dockerfile
+    ports:
+      - 8080:8080
+    command: npm run start:prod:mobile
+    networks:
+      - terangafun-network
+  product-app:
+    build:
+      context: .
+      dockerfile: ./apps/product-app/Dockerfile
+    ports:
+      - 4000:4000
+    command: npm run start:prod:product
+    networks:
+      - terangafun-network
+  user-app:
+    build:
+      context: .
+      dockerfile: ./apps/user-app/Dockerfile
+    ports:
+      - 3000:3000
+    command: npm run start:prod:user
+    networks:
+      - terangafun-network
+networks:
+  terangafun-network:
+    name : terangafun-network
+  
