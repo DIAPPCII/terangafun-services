@@ -1,8 +1,8 @@
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Product } from "../../product/entities/product.entity";
+import { Activity } from "../../activity/entities/activity.entity";
 
 @Entity()
-export class Category {
+export class ActivityType {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -15,8 +15,8 @@ export class Category {
   @Column({ nullable: true })
   image: string;
 
-  @ManyToMany(() => Product, (product) => product.categories)
-  products: Product[];
+  @ManyToMany(() => Activity, (activity) => activity.activityTypes)
+  activities: Activity[];
 
   @Column({ type: "timestamp" })
   createAt: Date;
