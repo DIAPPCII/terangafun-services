@@ -1,5 +1,5 @@
 import { IsNotEmpty } from 'class-validator';
-import { Category } from '../../category/entities/category.entity';
+//import { Category } from '../../category/entities/category.entity';
 
 export class CreateProductDto {
   @IsNotEmpty({ message: 'field [name] should not be empty or null' })
@@ -8,6 +8,6 @@ export class CreateProductDto {
   types : 'Produit' | 'services';
   priceMin : number;
   priceMax : number;
-  categories: Category[];
+  //categories: Category[];
   size : string;
 }

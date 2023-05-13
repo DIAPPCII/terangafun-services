@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { ActivityType } from "../../activity-type/entities/activity-type.entity";
+// import { ActivityType } from "../../activity-type/entities/activity-type.entity";
 
 @Entity()
 export class Activity {
@@ -13,11 +13,11 @@ export class Activity {
   description: string;
 
   // TODO : relation with media
-  @Column({ nullable: true })
-  medias: string[];
+  //@Column({ nullable: true })
+  //medias: string[];
 
-  @ManyToMany(() => ActivityType, (activityType) => activityType.activities)
-  activityTypes: ActivityType[];
+ // @ManyToMany(() => ActivityType, (activityType) => activityType.activities)
+ // activityTypes: ActivityType[];
 
   @Column({ nullable: true })
   address: string;

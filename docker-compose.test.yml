@@ -7,6 +7,12 @@ services:
       context: .
       dockerfile: Dockerfile-test
     command: npm run start:all
+    ports:
+      - 3000:3000
+      - 4000:4000
+      - 5000:5000
+      - 6000:6000
+      - 8080:8080
     networks:
       - terangafun-network
 networks:

@@ -11,6 +11,8 @@ COPY tsconfig*.json ./
 #RUN npm install -g @nestjs/cli
 RUN npm install
 
+EXPOSE 3000 4000 5000 6000 8080
+
 COPY . .
 
 

@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Activity } from "../../activity/entities/activity.entity";
+//import { Activity } from "../../activity/entities/activity.entity";
 
 @Entity()
 export class ActivityType {
@@ -15,8 +15,8 @@ export class ActivityType {
   @Column({ nullable: true })
   image: string;
 
-  @ManyToMany(() => Activity, (activity) => activity.activityTypes)
-  activities: Activity[];
+  //@ManyToMany(() => Activity, (activity) => activity.activityTypes)
+  //activities: Activity[];
 
   @Column({ type: "timestamp" })
   createAt: Date;

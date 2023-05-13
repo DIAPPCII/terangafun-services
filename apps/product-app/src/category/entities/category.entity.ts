@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Product } from "../../product/entities/product.entity";
+//import { Product } from "../../product/entities/product.entity";
 
 @Entity()
 export class Category {
@@ -15,8 +15,8 @@ export class Category {
   @Column({ nullable: true })
   image: string;
 
-  @ManyToMany(() => Product, (product) => product.categories)
-  products: Product[];
+  //@ManyToMany(() => Product, (product) => product.categories)
+  //products: Product[];
 
   @Column({ type: "timestamp" })
   createAt: Date;

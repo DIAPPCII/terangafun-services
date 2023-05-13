@@ -15,6 +15,9 @@ import { EurekaModule } from "nestjs-eureka";
 import { ShopModule } from "./shop/shop.module";
 import { ShopTypeModule } from "./shop-type/shop-type.module";
 import { SharedModule } from "@terangafun/shared";
+import { ActivityModule } from "./activity/activity.module";
+import { ProductModule } from "./product/product.module";
+import { ActivityType } from "./activity-type/entities/activity-type.entity";
 
 @Module({
   imports: [
@@ -46,6 +49,10 @@ import { SharedModule } from "@terangafun/shared";
       },
     }),
     CategoryModule,
+    ProductModule,
+    ActivityModule,
+    ActivityModule,
+    ActivityType,
     TagModule,
     HeadingModule,
     SiteModule,

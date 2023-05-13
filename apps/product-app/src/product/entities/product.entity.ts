@@ -13,11 +13,11 @@ export class Product {
   description: string;
 
   // TODO : relation with media
-  @Column({ nullable: true })
-  medias: string[];
+  //@Column({ nullable: true })
+  //medias: string[];
 
-  @ManyToMany(() => Category, (category) => category.products)
-  categories: Category[];
+  //@ManyToMany(() => Category, (category) => category.products)
+  //categories: Category[];
   
 
   @Column({ nullable: true })
