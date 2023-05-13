@@ -1,20 +1,21 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, ValidationPipe } from "@nestjs/common";
 import { ShopService } from "./shop.service";
 import { CreateShopDto } from "./dto/create-shop.dto";
 import { UpdateShopDto } from "./dto/update-shop.dto";
+import { Paginate, PaginateQuery } from "nestjs-paginate";
 
 @Controller("shop")
 export class ShopController {
   constructor(private readonly shopService: ShopService) {}
 
   @Post()
-  create(@Body() createShopDto: CreateShopDto) {
+  create(@Body(new ValidationPipe()) createShopDto: CreateShopDto) {
     return this.shopService.create(createShopDto);
   }
 
   @Get()
-  findAll() {
-    return this.shopService.findAll();
+  findAll(@Paginate() query: PaginateQuery) {
+    return this.shopService.findAll(query);
   }
 
   @Get(":id")

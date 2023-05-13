@@ -6,29 +6,29 @@ import { MediaModule } from "./media/media.module";
 import { SharedService } from "./shared.service";
 import { Tag } from "./tag/entities/tag.entity";
 import { TagModule } from "./tag/tag.module";
-import { Event } from "apps/event-app/src/entities/event.entity";
-import { EventType } from "apps/event-app/src/event-type/entities/event-type.entity";
-import { User } from "apps/user-app/src/users/entities/user.entity";
+import { AddressModule } from "./address/address.module";
+import { Address } from "@terangafun/shared/address/entities/address.entity";
 
 @Global()
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Event, EventType, User]),
+    //TypeOrmModule.forFeature([Event, EventType, User]),
     TypeOrmModule.forRoot({
       type: "mysql",
       username: "diappci",
       password: "tFun2022#",
       host: "tfun-dev.cjmqfgeh0fox.eu-west-3.rds.amazonaws.com",
       database: "tfundb_dev",
-      entities: [Media, Tag, Event, EventType, User],
+      entities: [Media, Tag, Address],
       synchronize: true,
       logging: true,
       namingStrategy: new SnakeNamingStrategy(),
     }),
     MediaModule,
     TagModule,
+    AddressModule,
   ],
   providers: [SharedService],
-  exports: [SharedService],
+  exports: [SharedService, AddressModule],
 })
 export class SharedModule {}

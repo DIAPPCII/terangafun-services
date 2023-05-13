@@ -14,6 +14,7 @@ import { LocationTypeModule } from "./location-type/location-type.module";
 import { EurekaModule } from "nestjs-eureka";
 import { ShopModule } from "./shop/shop.module";
 import { ShopTypeModule } from "./shop-type/shop-type.module";
+import { SharedModule } from "@terangafun/shared";
 
 @Module({
   imports: [
@@ -29,7 +30,6 @@ import { ShopTypeModule } from "./shop-type/shop-type.module";
       logging: true,
       namingStrategy: new SnakeNamingStrategy(),
     }),
-
     EurekaModule.forRoot({
       disable: false,
       disableDiscovery: false,
@@ -55,6 +55,7 @@ import { ShopTypeModule } from "./shop-type/shop-type.module";
     LocationTypeModule,
     ShopModule,
     ShopTypeModule,
+    SharedModule,
   ],
   controllers: [ProductAppController],
   providers: [ProductAppService],

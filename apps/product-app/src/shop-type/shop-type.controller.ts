@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, ValidationPipe } from "@nestjs/common";
 import { ShopTypeService } from "./shop-type.service";
 import { CreateShopTypeDto } from "./dto/create-shop-type.dto";
 import { UpdateShopTypeDto } from "./dto/update-shop-type.dto";
@@ -9,7 +9,7 @@ export class ShopTypeController {
   constructor(private readonly shopTypeService: ShopTypeService) {}
 
   @Post()
-  create(@Body() createShopTypeDto: CreateShopTypeDto) {
+  create(@Body(new ValidationPipe()) createShopTypeDto: CreateShopTypeDto) {
     return this.shopTypeService.create(createShopTypeDto);
   }
 

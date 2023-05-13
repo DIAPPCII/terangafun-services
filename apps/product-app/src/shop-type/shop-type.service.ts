@@ -14,8 +14,8 @@ export class ShopTypeService {
     const shopType = new ShopType();
     shopType.name = createShopTypeDto.name;
     shopType.description = createShopTypeDto.description;
-    shopType.createAt = new Date();
-    shopType.lastUpdate = shopType.createAt;
+    shopType.createdAt = new Date();
+    shopType.lastUpdate = shopType.createdAt;
     return await this.shopTypeRepository.save(shopType).catch(error => {
       switch (error.code) {
         case "ER_DUP_ENTRY":
@@ -27,12 +27,12 @@ export class ShopTypeService {
 
   async findAll(query: PaginateQuery): Promise<Paginated<ShopType>> {
     return await paginate(query, this.shopTypeRepository, {
-      sortableColumns: ["id", "name", "createAt", "lastUpdate"],
+      sortableColumns: ["id", "name", "createdAt", "lastUpdate"],
       //nullSort: 'first',
       searchableColumns: ["name", "description"],
-      defaultSortBy: [["createAt", "DESC"]],
+      defaultSortBy: [["createdAt", "DESC"]],
       filterableColumns: {
-        createAt: [FilterOperator.GTE, FilterOperator.LTE],
+        createdAt: [FilterOperator.GTE, FilterOperator.LTE],
         lastUpdate: [FilterOperator.GTE, FilterOperator.LTE],
       },
     }).catch(error => {

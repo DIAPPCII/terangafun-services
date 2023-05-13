@@ -15,7 +15,7 @@ export class ShopType {
   avatar: string;
 
   @Column({ type: "timestamp" })
-  createAt: Date;
+  createdAt: Date;
 
   @Column({ type: "timestamp" })
   lastUpdate: Date;

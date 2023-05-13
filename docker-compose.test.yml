@@ -5,7 +5,7 @@ services:
     container_name: terangafun-api
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: Dockerfile-test
     command: npm run start:prod:all
     networks:
       - terangafun-network

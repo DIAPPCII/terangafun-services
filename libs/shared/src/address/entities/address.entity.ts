@@ -1,8 +1,19 @@
+import { Column, Entity, PrimaryColumn } from "typeorm";
+
+@Entity()
 export class Address {
-  address1: string;
-  address2: string;
+  @PrimaryColumn()
+  address: string;
+  @Column()
+  postalCode: string;
+  @Column({ nullable: false })
   city: string;
+  @Column()
   state: string;
-  postCode: number;
+  @Column({ nullable: false })
   country: string;
+  @Column()
+  latitude: string;
+  @Column()
+  longitude: string;
 }
