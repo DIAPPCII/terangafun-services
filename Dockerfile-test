@@ -11,6 +11,8 @@ COPY tsconfig*.json ./
 #RUN npm install -g @nestjs/cli
 RUN npm install
 
+COPY . .
+
 
 # Creates a "dist" folder with the production build
 RUN npm run build:all

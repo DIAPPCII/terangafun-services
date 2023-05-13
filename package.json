@@ -18,7 +18,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/apps/mobile-proxy/main.js",
-    "start:prod:all": "node dist/apps/product-app/main.js && node dist/apps/user-app/main.js && node dist/apps/mobile-proxy/main.js && node dist/apps/business-app/main.js",
+    "start:all": "node dist/apps/product-app/main.js && node dist/apps/user-app/main.js && node dist/apps/mobile-proxy/main.js && node dist/apps/business-app/main.js",
     "start:prod:product": "node dist/apps/product-app/main.js",
     "start:prod:user": "node dist/apps/user-app/main.js",
     "start:prod:business": "node dist/apps/business-app/main.js",

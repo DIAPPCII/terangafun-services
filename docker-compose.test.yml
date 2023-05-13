@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile-test
-    command: npm run start:prod:all
+    command: npm run start:all
     networks:
       - terangafun-network
 networks:
