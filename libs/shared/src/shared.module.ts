@@ -8,6 +8,7 @@ import { Tag } from "./tag/entities/tag.entity";
 import { TagModule } from "./tag/tag.module";
 import { AddressModule } from "./address/address.module";
 import { Address } from "@terangafun/shared/address/entities/address.entity";
+import { CountryModule } from "./country/country.module";
 
 @Global()
 @Module({
@@ -27,6 +28,7 @@ import { Address } from "@terangafun/shared/address/entities/address.entity";
     MediaModule,
     TagModule,
     AddressModule,
+    CountryModule,
   ],
   providers: [SharedService],
   exports: [SharedService, AddressModule],

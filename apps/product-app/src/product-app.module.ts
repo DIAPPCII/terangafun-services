@@ -18,6 +18,8 @@ import { SharedModule } from "@terangafun/shared";
 import { ActivityModule } from "./activity/activity.module";
 import { ProductModule } from "./product/product.module";
 import { ActivityType } from "./activity-type/entities/activity-type.entity";
+import { DestinationModule } from "./destination/destination.module";
+import { DestinationTypeModule } from "./destination-type/destination-type.module";
 
 @Module({
   imports: [
@@ -63,6 +65,8 @@ import { ActivityType } from "./activity-type/entities/activity-type.entity";
     ShopModule,
     ShopTypeModule,
     SharedModule,
+    DestinationModule,
+    DestinationTypeModule,
   ],
   controllers: [ProductAppController],
   providers: [ProductAppService],
